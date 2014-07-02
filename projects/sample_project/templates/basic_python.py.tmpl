@@ -1,0 +1,29 @@
+# /usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+@author: Vojtech Burian
+"""
+from selenium.webdriver.common.by import By
+from pages.page_base import Page
+
+
+class {{ class_name }}(Page):
+    """ {{ page['comment'] }} """
+
+    def __init__(self, driver):
+        Page.__init__(self, driver)
+        self.driver = driver
+
+        {% for locator in page['locators'] %}
+        self._{{locator['name']}}_locator = (By.{{ locator['id_method'] }}, '{{ locator['locator']}}')
+        {% endfor %}
+    {% for locator in page['locators'] %}
+
+    @property
+    def {{locator['name']}}(self):
+    {% if locator['unique'] %}
+        return self.driver.find_element(*self._{{ locator['name'] }}_locator)
+    {% else %}
+        return self.driver.find_elements(*self._{{ locator['name'] }}_locator)
+    {% endif %}
+    {% endfor %}

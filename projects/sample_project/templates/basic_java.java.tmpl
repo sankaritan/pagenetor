@@ -1,0 +1,18 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+/**
+ * @author Vojtech Burian
+ */
+public class {{ class_name }} extends PageBase {
+
+    {% for locator in page['locators'] %}
+    @FindBy({{ locator['id_method'] }} = "{{ locator['locator']}}")
+	WebElement {{locator['name']}};
+
+    {% endfor %}
+
+}
