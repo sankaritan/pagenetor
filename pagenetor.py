@@ -65,7 +65,3 @@ class PageGenerator():
         for item in name_list:
             file_name += item.capitalize()
         return file_name
-
-
-generator = PageGenerator()
-generator.run()
